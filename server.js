@@ -1,3 +1,4 @@
+const morgan = require("morgan");
 const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
@@ -9,8 +10,11 @@ const app = express()
 app.use(cors())
 app.use(helmet())
 app.use(express.json()) //you no longer need body-parser package...it comes built into expressJS now
+app.use(morgan("combined"))
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+});
 
 app.post('/secret', (req, res) => {
   const { userInput } = req.body;
